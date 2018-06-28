@@ -1,4 +1,4 @@
-FROM microsoft/windowsservercore
+FROM microsoft/windowsservercore:10.0.14393.1480
 
 LABEL maintainer "Perry Skountrianos"
 
@@ -6,9 +6,10 @@ LABEL maintainer "Perry Skountrianos"
 ENV exe "https://go.microsoft.com/fwlink/?linkid=840945"
 ENV box "https://go.microsoft.com/fwlink/?linkid=840944"
 
-ENV sa_password _
-ENV attach_dbs "[]"
-ENV ACCEPT_EULA _
+ENV sa_password="_" \
+    attach_dbs="[]" \
+    ACCEPT_EULA="_" \
+    sa_password_path="C:\ProgramData\Docker\secrets\sa-password"
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -18,6 +19,8 @@ WORKDIR /
 
 RUN Invoke-WebRequest -Uri $env:box -OutFile SQL.box ; \
         Invoke-WebRequest -Uri $env:exe -OutFile SQL.exe ; \
+        $progressPreference = 'Continue'; \
+        $global:progressPreference = 'Continue'; \
         Start-Process -Wait -FilePath .\SQL.exe -ArgumentList /qs, /x:setup ; \
         .\setup\setup.exe /q /ACTION=Install /INSTANCENAME=MSSQLSERVER /FEATURES=SQLEngine,FullText /UPDATEENABLED=0 /SQLSVCACCOUNT='NT AUTHORITY\NETWORK SERVICE' /SQLSYSADMINACCOUNTS='BUILTIN\ADMINISTRATORS' /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS ; \
         Remove-Item -Recurse -Force SQL.exe, SQL.box, setup
