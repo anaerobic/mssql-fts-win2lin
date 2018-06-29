@@ -1,6 +1,8 @@
-# mssql-win2lin (riffing on SQL Server Lab)
+# mssql-win2lin
 
-The SQL Server Developer image — [microsoft/mssql-server-windows-developer](https://github.com/Microsoft/mssql-docker/tree/master/windows/mssql-server-windows-developer) — lets you run a SQL Server database with Full-Text Search in a Docker container on Windows, without having SQL Server installed. All you need is Docker. 
+This riffs on https://github.com/docker/labs/blob/master/windows/sql-server and attempts to build a sqlproj/dacpac, deploy it and a PostDeployment.Reference.sql script to an mssql-windows instance, then somehow *sparkles* it into an mssql-linux image ♪┏(・o･)┛♪┗-(-･o･)-┓♪
+
+This also riffs on the SQL Server Developer image — [microsoft/mssql-server-windows-developer](https://github.com/Microsoft/mssql-docker/tree/master/windows/mssql-server-windows-developer) and lets you run a SQL Server database with Full-Text Search in a Docker container on Windows, without having SQL Server installed. All you need is Docker. 
 
 ## Prerequisites
 
