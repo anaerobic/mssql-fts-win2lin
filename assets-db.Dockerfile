@@ -8,7 +8,7 @@ RUN msbuild Assets.Database.sqlproj `
       /p:SqlServerRedistPath="C:\Microsoft.Data.Tools.Msbuild.10.0.61026\lib\net40"
 
 # db image
-FROM sql-server-fts
+FROM mssql-windows
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
 VOLUME C:\database

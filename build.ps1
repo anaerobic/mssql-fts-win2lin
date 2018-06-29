@@ -6,9 +6,11 @@ mkdir out
 docker run --rm -v $pwd\out:c:\bin -v $pwd\src:c:\src sql-builder
 
 # Part 2 - build the SQL server image
-docker build --memory 4g -t sql-server-fts -f sql-server.Dockerfile .
+docker build --memory 4g -t mssql-windows -f mssql-windows.Dockerfile .
 
-docker build -t assets-db -f v1.Dockerfile .
+docker build -t assets-db -f assets-db.Dockerfile .
+
+docker build --platform=linux -t mssql-linux -f mssql-linux.Dockerfile .
 
 # docker run --rm --name assets-db --publish 1433 assets-db
 
