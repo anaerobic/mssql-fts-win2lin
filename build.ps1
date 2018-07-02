@@ -15,3 +15,5 @@ docker build --platform=linux -t mssql-linux -f mssql-linux.Dockerfile .
 # docker run --rm --name assets-db --publish 1433 assets-db
 
 # docker container inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}' assets-db
+
+docker run --rm --name mssql-linux --publish 1433 -e "ACCEPT_EULA=Y" -e "MSSQL_PID=Developer" mssql-linux
